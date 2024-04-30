@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse
-from home.models import Contact
+from home.models import Contact, Blog
 from datetime import datetime
 from django.contrib import messages
 
@@ -29,3 +29,15 @@ def contact(request):
         messages.success(request, "Your message has been sent.")
 
     return render(request, 'contact.html')
+
+def blog(request):
+    if request.method == "POST":
+        
+        blog_name = request.POST.get('blog_name')
+        category = request.POST.get('category')
+        description = request.POST.get('description')
+        blogs = Blog(blog_name=blog_name, category=category, description=description)
+        blogs.save()
+    else:
+        all_blogs = Blog.objects.all()
+    return render(request, 'blog.html', {'all_blogs':all_blogs})

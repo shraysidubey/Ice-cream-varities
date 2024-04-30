@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}  Services {% endblock title %}
+
+{% block body %}
+
+<div class="container-fluid my-10" style="padding: 50px">
+    <h1 class="text-center">Blogs</h1>
+    <form method="POST" action="/blog">
+      {% csrf_token %}
+    <div class="mb-3">
+        <label for="blog_name" class="form-label">Name of your Desert</label>
+        <input type="text" class="form-control" id="blog_name" name="blog_name">
+    </div>
+
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <input type="category" class="form-control" id="category" name="category">
+    </div>
+
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" name="description"></textarea>
+    </div>
+    
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <ul>
+  <h2>Blogs about sweets</h2>
+ 
+    {% for i in all_blogs%}
+    <b> Name of Blogs: </b>  <a> {{ i.blog_name }} </a><br>
+    <b>category: </b>        <a>{{ i.category }} </a><br>
+<b>  description:   </b>           <a>{{ i.description }}  </a><br>
+    {%endfor%}
+  </ul>
+
+  </form>
+
+{% endblock body %}
